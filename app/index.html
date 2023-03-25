@@ -1,0 +1,57 @@
+
+<html>
+<head>
+  <script type="module" src="https://unpkg.com/@freshworks/crayons/dist/crayons/crayons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/@freshworks/crayons/dist/crayons/crayons.js"></script>
+  <link rel="stylesheet" href="styles/styles.css" />
+  <script src="https://static.freshdev.io/fdk/2.0/assets/fresh_client.js"></script>
+
+</head>
+
+<body>
+        <h1>Deal Data</h1>
+        <!-- table for showing data -->
+        <form id="form">
+          <label for="opportunity_stage">Opportunity Stage:</label>
+          <select name="opportunity_stage" id="cars">
+            <option value="Initiation">Initiation</option>
+            <option value="Discussion">Discussion</option>
+            <option value="Design">Design</option>
+            <option value="Proposal">Proposal</option>
+            <option value="Negotiation">Negotiation</option>
+            <option value="Won">Won</option>
+            <option value="PO">PO</option>
+            <option value="Delivery">Delivery</option>
+            <option value="Lost">Lost</option>
+          </select><br><br>
+          <label for="lead_status">Lead Status:</label>
+          <select name="lead_status" id="cars2">
+            <option value="Cold">Cold</option>
+            <option value="Warm">Warm</option>
+            <option value="Hot">Hot</option>
+            <option value="Lost">Lost</option>
+          </select><br><br>
+          <input type="submit" value="Submit">
+        </form>
+        <table id="deal-data" height="50%" width="50%">
+        </table>
+        <h5 id="probablitySection"></h5>
+        <script>
+          let form = document.getElementById("form")
+          let f1= document.getElementById("cars")
+          let f2= document.getElementById("cars2")
+          form.addEventListener("submit", async (e)=>{
+            alert("jfjfjhj")
+            e.preventDefault()
+            let info = JSON.stringify( {lead_status:f1.value, opp_stage:f2.value})
+            let fetchSetting={method:"post",headers:{"Content-type":"application/json"},body:info}
+           let response = await fetch("/handleForm",fetchSetting)
+           let result = await response.text()
+           document.getElementById("probablitySection").innerText=result
+          
+          })
+          </script>
+            <script src="scripts/app.js"></script>
+</body>
+
+</html>
